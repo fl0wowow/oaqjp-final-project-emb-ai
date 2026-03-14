@@ -8,6 +8,9 @@ my_app = Flask('Final Project')
 def sent_emotion():
     text_to_check = request.args.get("textToAnalyze")
     response = emotion_detector(text_to_check)
+    if response['dominant_emotion'] is None:
+        return "Invalid text! Please try again!"
+        
     return f"For the given statement, the system response is 'anger': {response['anger']}, \
     'disgust': {response['disgust']}, 'fear': {response['fear']}, \
     'joy': {response['joy']} and 'sadness': {response['sadness']}. \
